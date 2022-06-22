@@ -1,19 +1,17 @@
 async function main (){
 
-function boiler(){
+
     let map = boilerMap();
 
-
     let quiteReq = loadQcenterJson();
-    let pstoreReq = loadPstoreJson();
-    let bcenterReq = loadBcenterJson();
-    let ccenterReq = loadCcenterJson();
-    
-    let quitCenterLayer = await quiteReq;
-    let pharmaLayer = await pstoreReq;
-    let breastLayer = await bcenterReq;
-    let cervicalLayer = await ccenterReq;
-    
+let pstoreReq = loadPstoreJson();
+let bcenterReq = loadBcenterJson();
+let ccenterReq = loadCcenterJson();
+
+let quitCenterLayer = await quiteReq;
+let pharmaLayer = await pstoreReq;
+let breastLayer = await bcenterReq;
+let cervicalLayer = await ccenterReq;
 
 async function loadQcenterJson() {
 
@@ -77,10 +75,6 @@ let overLayers = {
 }).addTo(map)*/
 L.control.layers(null, overLayers).addTo(map);
 }
-boiler();
-}
-
-
 
 main();
 
