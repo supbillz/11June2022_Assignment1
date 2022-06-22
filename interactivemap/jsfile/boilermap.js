@@ -1,4 +1,4 @@
-/*function boilerMap() {
+function boilerMap() {
     let map = L.map('map');
     let centerPoint = [1.3521, 103.8198]  // the map variable will store an object referring to the Leaflet map
     map.setView(centerPoint, 13);  // setView takes one array as the argument
@@ -15,5 +15,6 @@
         accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw' //demo access token
     })
     tileLayer.addTo(map);
+
     return map;
-}*/
+}
