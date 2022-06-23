@@ -2,8 +2,18 @@ async function main (){
 
 
     let map = boilerMap();
+    
+    window.addEventListener("DOMContentLoaded", function(){
 
-    let quiteReq = loadQcenterJson();
+        document.querySelector("#btnSearch").addEventListener('click', async function(){
+            let query = document.querySelector("#inputQuery").value;
+            let center = map.getBounds().getCenter();
+            let result = await find(center.lat, center.lng, query);
+             console.log(response);
+        })
+    })
+
+let quiteReq = loadQcenterJson();
 let pstoreReq = loadPstoreJson();
 let bcenterReq = loadBcenterJson();
 let ccenterReq = loadCcenterJson();
@@ -77,5 +87,5 @@ L.control.layers(null, overLayers).addTo(map);
 }
 
 main();
-
+ 
  

@@ -5,3 +5,15 @@ div#map {
 img {
     width: 100%;
 }
+
+#map-container{ 
+    position: relative;
+}
+
+#search-container {
+position: absolute;
+z-index: 314159;
+top: 10px;
+left: 45px;
+}
+
