@@ -1,91 +1,98 @@
-async function main (){
+async function main() {
 
 
     let map = boilerMap();
-    
-    window.addEventListener("DOMContentLoaded", function(){
 
-        document.querySelector("#btnSearch").addEventListener('click', async function(){
+    let findResultLayer = L.layerGroup();
+    findResultLayer.addTo(map);
+
+    window.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelector("#btnSearch").addEventListener('click', async function () {
             let query = document.querySelector("#inputQuery").value;
             let center = map.getBounds().getCenter();
-            let result = await find(center.lat, center.lng, query);
-             console.log(response);
+            let data = await find(center.lat, center.lng, query);
+
+            for (let result of data.results) {
+                let latlng = [result.geocodes.main.latitude, result.geocodes.main.longitude]
+                let resultMarker = L.marker(latlng);
+                resultMarker.addTo(findResultLayer);
+            }
         })
     })
 
-let quiteReq = loadQcenterJson();
-let pstoreReq = loadPstoreJson();
-let bcenterReq = loadBcenterJson();
-let ccenterReq = loadCcenterJson();
+    let quiteReq = loadQcenterJson();
+    let pstoreReq = loadPstoreJson();
+    let bcenterReq = loadBcenterJson();
+    let ccenterReq = loadCcenterJson();
 
-let quitCenterLayer = await quiteReq;
-let pharmaLayer = await pstoreReq;
-let breastLayer = await bcenterReq;
-let cervicalLayer = await ccenterReq;
+    let quitCenterLayer = await quiteReq;
+    let pharmaLayer = await pstoreReq;
+    let breastLayer = await bcenterReq;
+    let cervicalLayer = await ccenterReq;
 
-async function loadQcenterJson() {
+    async function loadQcenterJson() {
 
-    let response = await axios.get('geojson/quit-center.geojson');
-    let quitCenterLayer = L.geoJson(response.data, {
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return quitCenterLayer;
-}
+        let response = await axios.get('geojson/quit-center.geojson');
+        let quitCenterLayer = L.geoJson(response.data, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return quitCenterLayer;
+    }
 
-async function loadPstoreJson() {
-  
-    let pharmaResponse = await axios.get('geojson/pharma-store.geojson');
-    let pharmaLayer = L.geoJson(pharmaResponse.data, {
-        onEachFeature: function (feature, layer) {
+    async function loadPstoreJson() {
 
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return pharmaLayer;
-}
+        let pharmaResponse = await axios.get('geojson/pharma-store.geojson');
+        let pharmaLayer = L.geoJson(pharmaResponse.data, {
+            onEachFeature: function (feature, layer) {
 
-async function loadBcenterJson() {
-  
-    let breastResponse = await axios.get('geojson/breast-center.geojson');
-    let breastLayer = L.geoJson(breastResponse.data, {
-        onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return pharmaLayer;
+    }
 
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return breastLayer;
-}
+    async function loadBcenterJson() {
 
-async function loadCcenterJson() {
-  
-    let cervicalResponse = await axios.get('geojson/cervical-center.geojson');
-    let cervicalLayer = L.geoJson(cervicalResponse.data, {
-        onEachFeature: function (feature, layer) {
+        let breastResponse = await axios.get('geojson/breast-center.geojson');
+        let breastLayer = L.geoJson(breastResponse.data, {
+            onEachFeature: function (feature, layer) {
 
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return cervicalLayer;
-}
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return breastLayer;
+    }
 
-//quitCenterLayer.addTo(map);
-let overLayers = {
-    'Quit Ceners': quitCenterLayer,
-    'Pharmacy Stores': pharmaLayer,
-    'Breast Centers': breastLayer,
-    'Cervical Centers': cervicalLayer
-};
-/*L.control.layers({
-    'Quit Ceners': quitCenterLayer,
-    'Pharmacy Stores': pharmaLayer,
-    'Breast Centers': breastLayer,
-    'Cervical Centers': cervicalLayer
-}).addTo(map)*/
-L.control.layers(null, overLayers).addTo(map);
+    async function loadCcenterJson() {
+
+        let cervicalResponse = await axios.get('geojson/cervical-center.geojson');
+        let cervicalLayer = L.geoJson(cervicalResponse.data, {
+            onEachFeature: function (feature, layer) {
+
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return cervicalLayer;
+    }
+
+    //quitCenterLayer.addTo(map);
+    let overLayers = {
+        'Quit Ceners': quitCenterLayer,
+        'Pharmacy Stores': pharmaLayer,
+        'Breast Centers': breastLayer,
+        'Cervical Centers': cervicalLayer
+    };
+    /*L.control.layers({
+        'Quit Ceners': quitCenterLayer,
+        'Pharmacy Stores': pharmaLayer,
+        'Breast Centers': breastLayer,
+        'Cervical Centers': cervicalLayer
+    }).addTo(map)*/
+    L.control.layers(null, overLayers).addTo(map);
 }
 
 main();
- 
- 
+

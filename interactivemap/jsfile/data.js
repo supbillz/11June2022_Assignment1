@@ -5,14 +5,14 @@ const headers = {
     "Authorization": API_KEY
 }
 
- async function find(lat, lng, query){
-    let ll = lat+ "," +lng;
-    let response = await axios.get(BASE_API_URL + '/places/search',{
+async function find(lat, lng, query) {
+    let ll = lat + "," + lng;
+    let response = await axios.get(BASE_API_URL + "/places/search", {
         "headers": headers,
         "params": {
             'll': ll,
             'query': query
         }
     })
-    return response.data 
- }
+    return response.data
+}
