@@ -34,68 +34,72 @@ async function main() {
     async function loadQcenterJson() {
 
         let response = await axios.get('geojson/quit-center.geojson');
+        //let quitData = (response.data.features);
+        let quitMarkerCluster = L.markerClusterGroup();
+
         let quitCenterLayer = L.geoJson(response.data, {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup(feature.properties.Description);
             }
         })
-
+    
 
         return quitCenterLayer;
     }
+  
 
     document.querySelector('#btnQuitCenter').addEventListener('click', async function () {
-        let quitClusterResponse = await axios.get('geojson/quit-center.geojson');
-        let quitData = (quitClusterResponse.data.features);
-        let quitMarkerCluster = L.markerClusterGroup();
-
-        for (data of quitData) {
-            let lat = data.geometry.coordinates[1];
-            let lng = data.geometry.coordinates[0];
-            L.marker([lat, lng]).addTo(quitMarkerCluster)
-}
-quitMarkerCluster.addTo(map)
-})
-
-
+         let quitClusterResponse = await axios.get('geojson/quit-center.geojson');
+         let quitData = (quitClusterResponse.data.features);
+         let quitMarkerCluster = L.markerClusterGroup();
+ 
+         for (data of quitData) {
+             let lat = data.geometry.coordinates[1];
+             let lng = data.geometry.coordinates[0];
+             L.marker([lat, lng]).addTo(quitMarkerCluster)
+ }
+ quitMarkerCluster.addTo(map)
+ })
 
 
-async function loadPstoreJson() {
-
-    let pharmaResponse = await axios.get('geojson/pharma-store.geojson');
-    let pharmaLayer = L.geoJson(pharmaResponse.data, {
-        onEachFeature: function (feature, layer) {
-
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return pharmaLayer;
-}
 
 
-async function loadBcenterJson() {
+    async function loadPstoreJson() {
 
-    let breastResponse = await axios.get('geojson/breast-center.geojson');
-    let breastLayer = L.geoJson(breastResponse.data, {
-        onEachFeature: function (feature, layer) {
+        let pharmaResponse = await axios.get('geojson/pharma-store.geojson');
+        let pharmaLayer = L.geoJson(pharmaResponse.data, {
+            onEachFeature: function (feature, layer) {
 
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return breastLayer;
-}
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return pharmaLayer;
+    }
 
-async function loadCcenterJson() {
 
-    let cervicalResponse = await axios.get('geojson/cervical-center.geojson');
-    let cervicalLayer = L.geoJson(cervicalResponse.data, {
-        onEachFeature: function (feature, layer) {
+    async function loadBcenterJson() {
 
-            layer.bindPopup(feature.properties.Description);
-        }
-    })
-    return cervicalLayer;
-}
+        let breastResponse = await axios.get('geojson/breast-center.geojson');
+        let breastLayer = L.geoJson(breastResponse.data, {
+            onEachFeature: function (feature, layer) {
+
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return breastLayer;
+    }
+
+    async function loadCcenterJson() {
+
+        let cervicalResponse = await axios.get('geojson/cervical-center.geojson');
+        let cervicalLayer = L.geoJson(cervicalResponse.data, {
+            onEachFeature: function (feature, layer) {
+
+                layer.bindPopup(feature.properties.Description);
+            }
+        })
+        return cervicalLayer;
+    }
 
     //quitCenterLayer.addTo(map);
     /*let overLayers = {
@@ -110,7 +114,7 @@ async function loadCcenterJson() {
         'Breast Centers': breastLayer,
         'Cervical Centers': cervicalLayer
     }).addTo(map)
-  L.control.layers(layers, {}).addTo(map);
+    L.control.layers(layers, {}).addTo(map);
 }
 
 main();
