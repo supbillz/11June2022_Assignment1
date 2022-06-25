@@ -16,3 +16,33 @@ img {
     top: 10px;
     left: 45px;
 }
+
+#page-controller{
+    postion: relative;
+}
+
+.page {
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    /* the padding and margin will be considered as part of the element's width and height */
+    transition: transform 1s;
+}
+
+#page-container{
+    position: relative;
+}
+
+#page-1 {
+    background-color:aliceblue;
+}
+
+
+.hidden {
+    transform: translateX(-100%);
+}
+
+.show{
+    transform: translateX(0);
+}

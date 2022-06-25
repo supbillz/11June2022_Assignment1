@@ -33,22 +33,20 @@ async function main() {
 
     async function loadQcenterJson() {
 
+        //let markers = L.markerClusterGroup()
         let response = await axios.get('geojson/quit-center.geojson');
-        //let quitData = (response.data.features);
-        let quitMarkerCluster = L.markerClusterGroup();
-
         let quitCenterLayer = L.geoJson(response.data, {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup(feature.properties.Description);
             }
+            
         })
-    
 
         return quitCenterLayer;
     }
   
 
-    document.querySelector('#btnQuitCenter').addEventListener('click', async function () {
+    /*document.querySelector('#btnQuitCenter').addEventListener('click', async function () {
          let quitClusterResponse = await axios.get('geojson/quit-center.geojson');
          let quitData = (quitClusterResponse.data.features);
          let quitMarkerCluster = L.markerClusterGroup();
@@ -59,7 +57,8 @@ async function main() {
              L.marker([lat, lng]).addTo(quitMarkerCluster)
  }
  quitMarkerCluster.addTo(map)
- })
+ 
+ })*/
 
 
 
@@ -108,15 +107,43 @@ async function main() {
         'Breast Centers': breastLayer,
         'Cervical Centers': cervicalLayer
     };*/
+
+
     L.control.layers({
         'Quit Ceners': quitCenterLayer,
         'Pharmacy Stores': pharmaLayer,
         'Breast Centers': breastLayer,
         'Cervical Centers': cervicalLayer
     }).addTo(map)
+
     L.control.layers(layers, {}).addTo(map);
+   
 }
 
 main();
 
 
+document.querySelector('#btnhome').addEventListener('click', function(){
+    let allPages = document.querySelectorAll('.page');
+    for (let page of allPages){
+        page.classList.add('hidden');
+        page.classList.remove('show');
+    }
+
+    let page1 = document.querySelector('#page-1');
+    page1.classList.add('show');
+    page1.classList.remove('hidedn');
+})
+
+
+document.querySelector('#btnmap').addEventListener('click', function(){
+    let allPages = document.querySelectorAll('.page');
+    for (let page of allPages){
+        page.classList.add('hidden');
+        page.classList.remove('show');
+    }
+
+    let page2 = document.querySelector('#page-2');
+    page2.classList.add('show');
+    page2.classList.remove('hidden');
+})
