@@ -3,11 +3,13 @@ async function main() {
 
     let map = boilerMap();
 
+    // search-find result layer
     let findResultLayer = L.layerGroup();
     findResultLayer.addTo(map);
 
     window.addEventListener("DOMContentLoaded", function () {
 
+        // search button event listener
         document.querySelector("#btnSearch").addEventListener('click', async function () {
             let query = document.querySelector("#inputQuery").value;
             let center = map.getBounds().getCenter();
@@ -21,6 +23,11 @@ async function main() {
                 <h1>${result.location.formatted_address}</h1>
                 `)
                 resultMarker.addTo(findResultLayer);
+
+                let dropdownResEl = document.createElement('div');
+                dropdownResEl.className = 'search-dropdown';
+                dropdownResEl.innerHTML = result.name;
+                document.querySelector('#search-dropdown').appendChild(dropdownResEl);
             }
         })
     })
