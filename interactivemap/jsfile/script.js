@@ -3,8 +3,8 @@ async function main() {
 
     let map = boilerMap();
 
-    let findResultLayer = L.layerGroup();
-    findResultLayer.addTo(map);
+  //  let findResultLayer = L.layerGroup();
+   // findResultLayer.addTo(map);
 
     window.addEventListener("DOMContentLoaded", function () {
 
@@ -21,7 +21,7 @@ async function main() {
         })
     })
 
-    let quiteReq = loadQcenterJson();
+    let quiteReq = loadQuitGeo();
     let pstoreReq = loadPstoreJson();
     let bcenterReq = loadBcenterJson();
     let ccenterReq = loadCcenterJson();
@@ -31,7 +31,7 @@ async function main() {
     let breastLayer = await bcenterReq;
     let cervicalLayer = await ccenterReq;
 
-    async function loadQcenterJson() {
+    /*async function loadQcenterJson() {
 
         //let markers = L.markerClusterGroup()
         let response = await axios.get('geojson/quit-center.geojson');
@@ -43,8 +43,18 @@ async function main() {
         })
 
         return quitCenterLayer;
-    }
-  
+    }*/
+ 
+
+   
+    async function loadQuitGeo() {
+        let response = await axios.get('geojson/quit-center.geojson');
+         quitCenterLayer = L.geoJson(response.data).addTo(map);
+      }
+      return quitCenterLayer;
+
+     
+
 
     /*document.querySelector('#btnQuitCenter').addEventListener('click', async function () {
          let quitClusterResponse = await axios.get('geojson/quit-center.geojson');
@@ -99,6 +109,8 @@ async function main() {
         })
         return cervicalLayer;
     }
+
+    
 
     //quitCenterLayer.addTo(map);
     /*let overLayers = {
