@@ -3,7 +3,8 @@ async function main() {
 
     let map = boilerMap();
 
- 
+    let findResultLayer = L.layerGroup();
+    findResultLayer.addTo(map);
 
     window.addEventListener("DOMContentLoaded", function () {
 
@@ -15,6 +16,10 @@ async function main() {
             for (let result of data.results) {
                 let latlng = [result.geocodes.main.latitude, result.geocodes.main.longitude]
                 let resultMarker = L.marker(latlng);
+                resultMarker.bindPopup(`
+                <h1>${result.name}</h1>
+                <h1>${result.location.formatted_address}</h1>
+                `)
                 resultMarker.addTo(findResultLayer);
             }
         })
@@ -24,9 +29,9 @@ async function main() {
 main();
 
 
-document.querySelector('#btnhome').addEventListener('click', function(){
+document.querySelector('#btnhome').addEventListener('click', function () {
     let allPages = document.querySelectorAll('.page');
-    for (let page of allPages){
+    for (let page of allPages) {
         page.classList.add('hidden');
         page.classList.remove('show');
     }
@@ -37,9 +42,9 @@ document.querySelector('#btnhome').addEventListener('click', function(){
 })
 
 
-document.querySelector('#btnmap').addEventListener('click', function(){
+document.querySelector('#btnmap').addEventListener('click', function () {
     let allPages = document.querySelectorAll('.page');
-    for (let page of allPages){
+    for (let page of allPages) {
         page.classList.add('hidden');
         page.classList.remove('show');
     }
