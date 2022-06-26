@@ -24,11 +24,18 @@ async function main() {
                 `)
                 resultMarker.addTo(findResultLayer);
 
+                // search dropdown
                 let dropdownResEl = document.createElement('div');
                 dropdownResEl.className = 'search-dropdown';
                 dropdownResEl.innerHTML = result.name;
+                dropdownResEl.addEventListener('click', function(){
+                    map.flyTo(latlng, 15);
+                    resultMarker.openPopup();
+                  
+                })
                 document.querySelector('#search-dropdown').appendChild(dropdownResEl);
             }
+            
         })
     })
 }
