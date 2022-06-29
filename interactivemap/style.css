@@ -2,9 +2,10 @@ div#map {
     height: 100vh;
 }
 
-img {
-    width: 100%;
-}
+/*img {
+    width:20vw;
+    height:10vh;
+}*/
 
 #map-container {
     position: relative;
