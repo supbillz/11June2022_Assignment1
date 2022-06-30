@@ -29,12 +29,12 @@ div#map {
     position: absolute;
     width: 100%;
     box-sizing: border-box;
-    /* the padding and margin will be considered as part of the element's width and height */
     transition: transform 1s;
 }
 
 #page-container{
     position: relative;
+
 }
 
 #page-1 {
@@ -52,4 +52,39 @@ div#map {
 
 #search-dropdown {
     background-color: azure;
+}
+
+
+.navbar-brand{
+    font-weight: 800;
+    font-size: 30px;
+    background-color: #007bff;
+    padding: 15px;
+    border-radius: 20px ;
+    color: white;
+}
+
+.nav-link{
+    font-size: 20px ;
+}
+
+.nav-link:hover {
+    color: red;
+    transition: 0.3s;
+}
+
+.nav-item{
+    padding-left: 30px;
+    font-weight: 500;
+}
+
+#hero{
+    background-image: url(images/hospi-lobby.jpeg);
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: center;
+    background-size: cover;
 }
