@@ -16,3 +16,4 @@ async function find(lat, lng, query) {
     })
     return response.data
 }
+

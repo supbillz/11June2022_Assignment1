@@ -5,6 +5,7 @@ let zoomLevel = 11
 let query = '';
 let map = '';
 
+
 function initMap() {
     map = L.map('map').setView(centerPoint, zoomLevel);
 
@@ -31,7 +32,7 @@ function getGeoData(geoUrl, callback){
 
 function displayGeoMarkers(geodata) {
     // - marker cluster
-  let  markers = L.markerClusterGroup();
+  let markers = L.markerClusterGroup();
     
     // - loope through markers data list
     for (let n of geodata.features) {
