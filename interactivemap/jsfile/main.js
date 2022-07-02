@@ -6,7 +6,7 @@ $(function (){
     
     // to call geojson function and load layers
     getGeoData('geojson/breast-center.geojson', function(res) {
-        displayMarkers(res);
+        displayGeoMarkers(res);
 });
 
 
@@ -40,19 +40,19 @@ document.querySelector('#btnmap').addEventListener('click', function () {
 
     document.querySelector('#btnQuitCenter').addEventListener('click', function () {
         getGeoData('geojson/quit-center.geojson', function(res){
-            displayMarkers(res);
+            displayGeoMarkers(res);
         });
     })
 
     document.querySelector('#btnPharmaStore').addEventListener('click', function () {
         getGeoData('geojson/pharma-store.geojson', function(res){
-            displayMarkers(res);
+            displayGeoMarkers(res);
         });
     })
 
-    document.querySelector('#btnPharmaStore').addEventListener('click', function () {
-        getGeoData('geojson/pharma-store.geojson', function(res){
-            displayMarkers(res);
+    document.querySelector('#btnCervicalCenter').addEventListener('click', function () {
+        getGeoData('geojson/cervical-center.geojson', function(res){
+            displayGeoMarkers(res);
         });
     })
 

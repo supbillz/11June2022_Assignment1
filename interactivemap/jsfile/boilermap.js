@@ -3,7 +3,7 @@
 let centerPoint = [1.3521, 103.8198]
 let zoomLevel = 11
 let query = '';
-var map = '';
+let map = '';
 
 function initMap() {
     map = L.map('map').setView(centerPoint, zoomLevel);
@@ -23,15 +23,15 @@ function initMap() {
     return map;
 }
 
-function getPlacesData(apiUrl, callback){
-    axios.get(apiUrl).then(function(response){
+function getGeoData(geoUrl, callback){
+    axios.get(geoUrl).then(function(response){
         callback(response.data) 
     })
 }
 
-function displayMarkers(geodata) {
+function displayGeoMarkers(geodata) {
     // - marker cluster
-    markers = L.markerClusterGroup();
+  let  markers = L.markerClusterGroup();
     
     // - loope through markers data list
     for (let n of geodata.features) {
@@ -41,10 +41,10 @@ function displayMarkers(geodata) {
         pName = $(desc).children().children().children().children().eq(22).text()
 
         // - custom marker variable
-        var customMarker = L.icon({
+        let customMarker = L.icon({
             iconUrl: 'images/marker.png',
             shadowUrl: 'images/marker.png',
-            iconSize:     [38, 95], // size of the icon
+            iconSize:     [32, 32], // size of the icon
             shadowSize:   [50, 64], // size of the shadow
             iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
             shadowAnchor: [4, 62],  // the same for the shadow
@@ -52,7 +52,7 @@ function displayMarkers(geodata) {
         });
 
         // - init marker 
-        var marker = L.marker([
+        let marker = L.marker([
             n.geometry.coordinates[1], 
             n.geometry.coordinates[0],
             { icon: customMarker }
